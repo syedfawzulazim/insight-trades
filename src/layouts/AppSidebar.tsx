@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState,useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -22,7 +22,7 @@ type NavItem = {
   name: string;
   icon: React.ReactNode;
   path?: string;
-  subItems?: {name: string; path: string; pro?: boolean; new?:boolean}[];
+  subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
 const navItems: NavItem[] = [
@@ -99,25 +99,16 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
-        ${
-          isExpanded || isMobileOpen
-            ? "w-[290px]"
-            : isHovered
-            ? "w-[290px]"
-            : "w-[90px]"
-        }
-        ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0`}
-        onMouseEnter={() => !isExpanded && setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        >
-        <div className={`py-8 flex ${
-          !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
-        }`}>
+      className={`fixed top-0 left-0 z-50 mt-16 flex h-screen flex-col border-r border-gray-200 bg-white px-5  text-gray-900 transition-all duration-300 ease-in-out lg:mt-0 dark:border-gray-800 dark:bg-gray-900  dark:text-gray-400
+      w-[250px]  lg:w-[290px]
+
+      ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
+
+      onMouseEnter={() => !isExpanded && setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="hidden lg:flex py-8  lg:justify-center lg:py-">
         <Link href="/">
-          {isExpanded || isHovered || isMobileOpen ? (
-            <>
               <Image
                 className="dark:hidden"
                 src="/images/logo/light.png"
@@ -132,22 +123,9 @@ const AppSidebar: React.FC = () => {
                 width={150}
                 height={40}
               />
-            </>
-          ) : (
-            <Image
-              src="/images/favicon/android-chrome-192x192.png"
-              alt="Logo"
-              width={32}
-              height={32}
-            />
-          )}
         </Link>
-        </div>
-        <div>
-         Sidebar
-        </div>
-
-      
+      </div>
+      <div>Dashboard</div>
     </aside>
   );
 };
